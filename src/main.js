@@ -35,39 +35,37 @@ form.addEventListener('submit', async e => {
     });
   }
 
-  currentQuery = input;
-  currentPage = 1;
-  getImagesByQuery(currentQuery, currentPage)
-    .then(res => {
-      if (res.hits.length === 0) {
-        return iziToast.error({
-          title: 'Error',
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-          position: 'topRight',
-        });
-      }
+  try {
+    currentQuery = input;
+    currentPage = 1;
+    const res = await getImagesByQuery(currentQuery, currentPage);
 
-      createGallery(res.hits);
-
-      if (res.totalHits > currentPage * 15) {
-        showLoadMoreBtn();
-      } else {
-        hideLoadMoreBtn();
-      }
-    })
-    .catch(err => {
-      iziToast.error({
+    if (res.hits.length === 0) {
+      return iziToast.error({
         title: 'Error',
         message:
           'Sorry, there are no images matching your search query. Please try again!',
         position: 'topRight',
       });
-    })
-    .finally(() => {
-      hideLoader();
-      form.reset();
+    }
+
+    createGallery(res.hits);
+
+    if (res.totalHits > currentPage * 15) {
+      showLoadMoreBtn();
+    } else {
+      hideLoadMoreBtn();
+    }
+  } catch (err) {
+    iziToast.error({
+      title: 'Error',
+      message: 'Sorry, something went wrong. Please try again!',
+      position: 'topRight',
     });
+  } finally {
+    hideLoader();
+    form.reset();
+  }
 });
 
 loadBtn.addEventListener('click', async () => {
