@@ -10,12 +10,10 @@ let lightbox = null;
 
 export function showLoader() {
   loader.classList.remove('visually-hidden');
-  loadingText.classList.remove('visually-hidden');
 }
 
 export function hideLoader() {
   loader.classList.add('visually-hidden');
-  loadingText.classList.add('visually-hidden');
 }
 
 export function clearGallery() {
@@ -28,6 +26,13 @@ export function showLoadMoreBtn() {
 
 export function hideLoadMoreBtn() {
   loadBtn.classList.add('visually-hidden');
+}
+export function showLoadingText() {
+  loadingText.classList.remove('visually-hidden');
+}
+
+export function hideLoadingText() {
+  loadingText.classList.add('visually-hidden');
 }
 
 export function createGallery(images) {

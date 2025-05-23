@@ -15,12 +15,15 @@ import {
   createGallery,
   showLoadMoreBtn,
   hideLoadMoreBtn,
+  showLoadingText,
+  hideLoadingText,
 } from './js/render-functions';
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
   clearGallery();
   hideLoadMoreBtn();
+  hideLoadingText();
   showLoader();
 
   const input = e.currentTarget.elements['search-text'].value.trim();
@@ -70,7 +73,8 @@ form.addEventListener('submit', async e => {
 
 loadBtn.addEventListener('click', async () => {
   currentPage += 1;
-  showLoader();
+  hideLoadMoreBtn();
+  showLoadingText();
 
   try {
     const res = await getImagesByQuery(currentQuery, currentPage);
@@ -83,6 +87,8 @@ loadBtn.addEventListener('click', async () => {
         message: "We're sorry, but you've reached the end of search results.",
         position: 'topRight',
       });
+    } else {
+      showLoadMoreBtn();
     }
 
     const firstCard = document.querySelector('.gallery').firstElementChild;
@@ -100,6 +106,6 @@ loadBtn.addEventListener('click', async () => {
       position: 'topRight',
     });
   } finally {
-    hideLoader();
+    hideLoadingText();
   }
 });
