@@ -4,15 +4,18 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
 const loadBtn = document.querySelector('.load-more');
+const loadingText = document.querySelector('.loading-text');
 
 let lightbox = null;
 
 export function showLoader() {
   loader.classList.remove('visually-hidden');
+  loadingText.classList.remove('visually-hidden');
 }
 
 export function hideLoader() {
   loader.classList.add('visually-hidden');
+  loadingText.classList.add('visually-hidden');
 }
 
 export function clearGallery() {
