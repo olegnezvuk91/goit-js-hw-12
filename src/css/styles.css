@@ -98,8 +98,9 @@ input:active {
 .gallery-item {
   border: 1px solid #808080;
   width: 360px;
-  transition: transform 0.3s ease-in-out;
   border-radius: 5px;
+  background-color: #def2f7;
+  transition: transform 0.3s ease-in-out;
 }
 .gallery-item:hover,
 .gallery-item:focus {
